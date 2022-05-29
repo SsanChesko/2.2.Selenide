@@ -1,6 +1,8 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selectors;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
@@ -12,9 +14,14 @@ import static com.codeborne.selenide.Selenide.*;
 
 class TestCardWithDelivery {
 
+    @BeforeEach
+    private void setUp() {
+        Configuration.browserSize = "1920x1080";
+        Configuration.holdBrowserOpen = true;
+    }
+
     @Test
     void shouldTestHappyPath() {
-        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         $x("//input[@class='input__control']").val("Пермь");
 //        $x("//input[@type='tel']").doubleClick().sendKeys("10.06.2022");
@@ -29,8 +36,8 @@ class TestCardWithDelivery {
     }
 
     @Test
+    @Disabled
     void shouldTestNegotiveCity() {
-        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         $("[data-test-id='city'] input").sendKeys("Березники");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE, "30.06.2022");
@@ -44,7 +51,6 @@ class TestCardWithDelivery {
 
     @Test
     void shouldTestChoosePetrozavodsk() {
-        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         $("[data-test-id='city'] input").val("Пе").sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER);
         $x("//input[@type='tel']").doubleClick().sendKeys(Keys.BACK_SPACE, "17.07.2022");
@@ -58,7 +64,6 @@ class TestCardWithDelivery {
 
     @Test
     void shouldTestDataPlusWeek() {
-        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         $("[data-test-id='city'] input").sendKeys("Санкт-Петербург");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER);
