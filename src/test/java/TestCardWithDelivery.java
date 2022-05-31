@@ -86,6 +86,7 @@ class TestCardWithDelivery {
     }
 
     @Test
+    @Disabled
     void shouldTestDataPlusMonthOnCalendarOn10Jule() {
         open("http://localhost:9999/");
         $("[data-test-id='city'] input").sendKeys("Москва");
